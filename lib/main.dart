@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child:  RaisedButton(
-          child: Text("Open"),
+          child: Text("Open Modal"),
           onPressed: _showMyBottomSheet,
           color: Colors.blue,
           textColor: Colors.white,

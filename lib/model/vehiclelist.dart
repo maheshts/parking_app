@@ -30,7 +30,7 @@ class VehicleList {
     ),
     VehicleList(
       vehicle_name: "TRUCK",
-      imagePath: 'assets/images/car.png',
+      imagePath: 'assets/images/car.jpg',
 
     ),
   ];

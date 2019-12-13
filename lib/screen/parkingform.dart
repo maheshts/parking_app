@@ -5,49 +5,35 @@ import 'package:parking_app/resource/parking_app_theme.dart';
 import 'dart:math' as math;
 
 class ParkingForm extends StatefulWidget {
+  String mFromTime = "12.00";
+  String mToTime = "12.30";
+  String mCloseTime = "12.50";
   @override
   _ParkingFormState createState() => _ParkingFormState();
 }
-_ParkingFormState _globalState = new _ParkingFormState();
-
-
-
 class _ParkingFormState extends State<ParkingForm> {
   static MediaQueryData _mediaQueryData;
   static double screenWidth;
   static double screenHeight;
   Color color;
   bool changeColor = false;
-  static const String mAvailableText = "Available 133";
-  static const String mCapacityText = "Capacity 33";
-  static const String mLocationText = "2.5 km from location";
-  static const String mHeaderAddressText = "Lodha Supreme,Nehru marg,Mumbai";
-
-  String mFromTime = "12.00";
-  String mToTime = "12.30";
-  String mCloseTime = "12.50";
+  String mAvailableText = "Available 133";
+  String mCapacityText = "Capacity 33";
+  String mLocationText = "2.5 km from location";
+  String mHeaderAddressText = "Lodha Supreme,Nehru marg,Mumbai";
   var todayDate;
   DateTime mDate = new DateTime.now();
-
-
   String _dateval = '';
-  int _n = 0;
-
-
-
   int _selectedIndex = 0;
-
   _onSelected(int index) {
     setState(() => _selectedIndex = index);
   }
-
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-   }
-
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,170 +42,96 @@ class _ParkingFormState extends State<ParkingForm> {
     screenWidth = _mediaQueryData.size.width;
     screenHeight = _mediaQueryData.size.height;
     return new Scaffold(
-      body:
-
-      SingleChildScrollView(
-
+      body: SingleChildScrollView(
         child: Container(
-        margin: const EdgeInsets.only(left: 10, right: 10, top: 34),
-    decoration: new BoxDecoration(
-    color: ParkingAppTheme.notWhite,
-    borderRadius: new BorderRadius.only(
-    topLeft: const Radius.circular(40.0),
-    topRight: const Radius.circular(40.0))),
-    child:Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        _headerWidget(),
-        SizedBox(height: 8.0),
-        headerBelow(),
-        SizedBox(height: 10),
-        Divider(
-          height: 5,
-          color: Colors.black,
-        ),
-        SizedBox(
-          height: 15.0,
-        ),
-        new Container(
-          padding: EdgeInsets.only(left: 10.0),
-          child: SizedBox(
-            width: double.infinity,
-            child: Text(
-              'PARKING TIME',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 14,
-                letterSpacing: 0.17,
-                color: ParkingAppTheme.darkerText,
-              ),
-            ),
-          ),
-        ),
-        timeWidget(),
-        new Container(
-          padding: EdgeInsets.only(left: 10.0),
-          child: SizedBox(
-            width: double.infinity,
-            child: Text(
-              'PARKING DATE',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 14,
-                letterSpacing: 0.27,
-                color: ParkingAppTheme.darkerText,
-              ),
-            ),
-          ),
-        ),
-        dateWidget(),
-        SizedBox(
-          height: 10,
-        ),
-        new Container(
-          padding: EdgeInsets.only(left: 10.0),
-          child: SizedBox(
-            width: double.infinity,
-            child: Text(
-              'VEHICLE TYPE',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 14,
-                letterSpacing: 0.27,
-                color: ParkingAppTheme.darkerText,
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-          new  Row(
+          margin: const EdgeInsets.only(left: 10, right: 10, top: 34),
+          decoration: new BoxDecoration(
+              color: ParkingAppTheme.notWhite,
+              borderRadius: new BorderRadius.only(
+                  topLeft: const Radius.circular(40.0),
+                  topRight: const Radius.circular(40.0))),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Container(
-                //padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
-                margin: EdgeInsets.only(left: 10, right: 5),
-                height: 150,
-                width: screenWidth - 150,
-
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    //itemCount: vehicleDetails.length,
-                    itemCount: VehicleList.homeList.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        width: 105,
-                        child: Card(
-                          child: InkWell(
-                            child: Container(
-                                decoration: BoxDecoration(
-                                  color: _selectedIndex != null &&
-                                      _selectedIndex == index
-                                      ? ParkingAppTheme.grey
-                                      .withOpacity(0.1)
-                                      : Colors.white,
-                                  //borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                                  boxShadow: <BoxShadow>[
-                                    BoxShadow(
-                                        color: Colors.white,
-                                        //offset: const Offset(1.1, 1.1),
-                                        blurRadius: 16.0),
-                                  ],
-                                ),
-                                child: Center(
-                                  child: Stack(
-                                    children: <Widget>[
-                                      Column(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.center,
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: <Widget>[
-                                          //Image.asset(vehicleDetails[index]['image_url'],
-                                          Image.asset(
-                                              //"assets/images/bike.png",
-                                              VehicleList.homeList[index].imagePath,
-                                              height: 50,
-                                              fit: BoxFit.fill),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          //Text(vehicleDetails[index]['vehicle_name']),
-                                          Text(VehicleList.homeList[index].vehicle_name),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              // Center(child: Text(numbers[index].toString(), style: TextStyle(color: Colors.white, fontSize: 16.0),)),
-                            ),
-                            onTap: () {
-                              setState(() {
-                                _onSelected(index);
-                              });
-                            },
-                          ),
-                        ),
-                      );
-                    }),
+              _headerWidget(),
+              SizedBox(height: 8.0),
+              headerBelow(),
+              SizedBox(height: 10),
+              Divider(
+                height: 5,
+                color: Colors.black,
               ),
-              _buildRight(),
+              SizedBox(
+                height: 15.0,
+              ),
+              new Container(
+                padding: EdgeInsets.only(left: 10.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Text(
+                    'PARKING TIME',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                      letterSpacing: 0.17,
+                      color: ParkingAppTheme.darkerText,
+                    ),
+                  ),
+                ),
+              ),
+              timeWidget(),
+              new Container(
+                padding: EdgeInsets.only(left: 10.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Text(
+                    'PARKING DATE',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                      letterSpacing: 0.27,
+                      color: ParkingAppTheme.darkerText,
+                    ),
+                  ),
+                ),
+              ),
+              dateWidget(),
+              SizedBox(
+                height: 10,
+              ),
+              new Container(
+                padding: EdgeInsets.only(left: 10.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Text(
+                    'VEHICLE TYPE',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                      letterSpacing: 0.27,
+                      color: ParkingAppTheme.darkerText,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              vehicleWidget(),
+              SizedBox(
+                height: 10,
+              ),
             ],
           ),
-        SizedBox(
-          height: 10,
         ),
-      ],
-    ) ,
-      ),
       ),
     );
   }
 
-
-  Widget _headerWidget(){
+  Widget _headerWidget() {
     return Container(
       margin: EdgeInsets.only(left: 12, right: 12, top: 24),
       padding: EdgeInsets.only(
@@ -251,7 +163,7 @@ class _ParkingFormState extends State<ParkingForm> {
             ),
 
             SizedBox(width: 10.0),
-            const Expanded(
+            Expanded(
               child: Text(
                 mHeaderAddressText,
                 softWrap: true,
@@ -279,15 +191,15 @@ class _ParkingFormState extends State<ParkingForm> {
     );
   }
 
-  Widget headerBelow(){
-    return  Container(
+  Widget headerBelow() {
+    return Container(
       margin: EdgeInsets.only(left: 16, right: 16),
       //padding: EdgeInsets.only(left: 10,right: 10),
       child: new Row(
         //mainAxisSize: MainAxisSize.min,
         //crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const Expanded(
+          Expanded(
             child: Text(mLocationText,
                 maxLines: 1,
                 softWrap: false,
@@ -295,7 +207,7 @@ class _ParkingFormState extends State<ParkingForm> {
                 style: ParkingAppTheme.caption),
           ),
           SizedBox(width: 10),
-          const Expanded(
+          Expanded(
             child: Text(
               mCapacityText,
               textAlign: TextAlign.start,
@@ -308,7 +220,7 @@ class _ParkingFormState extends State<ParkingForm> {
             ),
           ),
           SizedBox(width: 10),
-          const Expanded(
+          Expanded(
             child: Text(
               mAvailableText,
               textAlign: TextAlign.start,
@@ -337,9 +249,9 @@ class _ParkingFormState extends State<ParkingForm> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            getTimeBoxUI('From ', _globalState.mFromTime, 'am'),
-            getTimeBoxUI(' To', _globalState.mToTime, 'pm'),
-            getTimeBoxUI('Closes at ', _globalState.mCloseTime, 'pm'),
+            getTimeBoxUI('From ', widget.mFromTime, 'am'),
+            getTimeBoxUI(' To', widget.mToTime, 'pm'),
+            getTimeBoxUI('Closes at ', widget.mCloseTime, 'pm'),
           ],
         ),
         const SizedBox(
@@ -348,6 +260,7 @@ class _ParkingFormState extends State<ParkingForm> {
       ],
     );
   }
+
   Widget getTimeBoxUI(String text1, String txt2, String txt3) {
     return Container(
       height: 75,
@@ -364,7 +277,7 @@ class _ParkingFormState extends State<ParkingForm> {
       ),
       child: Padding(
         padding:
-        const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
+            const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -405,11 +318,11 @@ class _ParkingFormState extends State<ParkingForm> {
     );
   }
 
-  Widget dateWidget(){
+  Widget dateWidget() {
     return Column(
       children: <Widget>[
         SizedBox(
-          //height: MediaQuery.of(context).padding.top,
+            //height: MediaQuery.of(context).padding.top,
             height: 16),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -421,8 +334,7 @@ class _ParkingFormState extends State<ParkingForm> {
                 width: 68,
                 child: InkWell(
                   highlightColor: Colors.grey,
-                  borderRadius:
-                  const BorderRadius.all(Radius.circular(8.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   onTap: () {
                     subtractDate();
                   },
@@ -430,7 +342,6 @@ class _ParkingFormState extends State<ParkingForm> {
                     child: Icon(
                       Icons.keyboard_arrow_left,
                       // color: ParkingAppTheme.grey,
-
                     ),
                   ),
                 ),
@@ -449,7 +360,6 @@ class _ParkingFormState extends State<ParkingForm> {
                 ),
                 child: Row(
                   children: <Widget>[
-
                     new Text(_dateval,
                         textAlign: TextAlign.center,
                         style: new TextStyle(fontSize: 16.0)),
@@ -462,10 +372,8 @@ class _ParkingFormState extends State<ParkingForm> {
                 height: 48,
                 width: 68,
                 child: InkWell(
-
                   highlightColor: Colors.grey,
-                  borderRadius:
-                  const BorderRadius.all(Radius.circular(8.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   onTap: () {
                     addDate();
                   },
@@ -480,128 +388,6 @@ class _ParkingFormState extends State<ParkingForm> {
             ),
           ],
         ),
-      ],
-    );
-  }
-
-
-
-  Widget footerWidget(){
-    new  Row(
-      children: <Widget>[
-        Container(
-          //padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
-          margin: EdgeInsets.only(left: 10, right: 5),
-          height: 150,
-          width: screenWidth - 100,
-
-          child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: VehicleList.homeList.length,
-              //itemCount: 2,
-              itemBuilder: (context, index) {
-                //vehicledata:VehicleList.homeList[index];
-                return Container(
-                  width: 105,
-            child: InkWell(
-              child: Container(
-                  decoration: BoxDecoration(
-                    color: _selectedIndex != null &&
-                        _selectedIndex == index
-                        ? ParkingAppTheme.grey
-                        .withOpacity(0.1)
-                        : Colors.white,
-                    borderRadius: const BorderRadius.all(Radius.circular(24.0)),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                          color: Colors.white,
-                          //offset: const Offset(1.1, 1.1),
-                          blurRadius: 16.0),
-                    ],
-                  ),
-                  child: Center(
-                    child: Stack(
-                      children: <Widget>[
-                        Column(
-                          mainAxisAlignment:
-                          MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            //Image.asset(vehicleDetails[index]['image_url'],
-                            Image.asset(
-                                "assets/images/bike.png",
-                                height: 50,
-                                fit: BoxFit.fill),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(VehicleList.homeList[index].vehicle_name),
-                          ],
-                        ),
-                      ],
-                    ),
-                  )
-                // Center(child: Text(numbers[index].toString(), style: TextStyle(color: Colors.white, fontSize: 16.0),)),
-              ),
-              onTap: () {
-                setState(() {
-                  _onSelected(index);
-                });
-              },
-            ),
-            /*      child: Card(
-                    child: InkWell(
-                      child: Container(
-                          decoration: BoxDecoration(
-                            color: _selectedIndex != null &&
-                                _selectedIndex == index
-                                ? ParkingAppTheme.grey
-                                .withOpacity(0.1)
-                                : Colors.white,
-                            //borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                  color: Colors.white,
-                                  //offset: const Offset(1.1, 1.1),
-                                  blurRadius: 16.0),
-                            ],
-                          ),
-                          child: Center(
-                            child: Stack(
-                              children: <Widget>[
-                                Column(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: <Widget>[
-                                    //Image.asset(vehicleDetails[index]['image_url'],
-                                    Image.asset(
-                                        "assets/images/bike.png",
-                                        height: 50,
-                                        fit: BoxFit.fill),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(vehicleDetails[index]
-                                    ['vehicle_name']),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          )
-                        // Center(child: Text(numbers[index].toString(), style: TextStyle(color: Colors.white, fontSize: 16.0),)),
-                      ),
-                      onTap: () {
-                        setState(() {
-                          _onSelected(index);
-                        });
-                      },
-                    ),
-                  ),*/
-                );
-              }),
-        ),
-        _buildRight(),
       ],
     );
   }
@@ -642,45 +428,98 @@ class _ParkingFormState extends State<ParkingForm> {
     );
   }
 
+  Widget vehicleWidget() {
+    return new Row(
+      children: <Widget>[
+        Container(
+          //padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
+          margin: EdgeInsets.only(left: 10, right: 5),
+          height: 150,
+          width: screenWidth - 140,
+
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: VehicleList.homeList.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  width: 105,
+                  child: Card(
+                    child: InkWell(
+                      child: Container(
+                          decoration: BoxDecoration(
+                            color: _selectedIndex != null &&
+                                    _selectedIndex == index
+                                ? ParkingAppTheme.grey.withOpacity(0.2)
+                                : Colors.white,
+                            //borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                  color: Colors.white,
+                                  offset: const Offset(1.1, 1.1),
+                                  blurRadius: 16.0),
+                            ],
+                          ),
+                          child: Center(
+                            child: Stack(
+                              children: <Widget>[
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: <Widget>[
+                                    //Image.asset(vehicleDetails[index]['image_url'],
+                                    Image.asset(
+                                        //"assets/images/bike.png",
+                                        VehicleList.homeList[index].imagePath,
+                                        height: 50,
+                                        fit: BoxFit.fill),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    //Text(vehicleDetails[index]['vehicle_name']),
+                                    Text(VehicleList
+                                        .homeList[index].vehicle_name),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                          // Center(child: Text(numbers[index].toString(), style: TextStyle(color: Colors.white, fontSize: 16.0),)),
+                          ),
+                      onTap: () {
+                        setState(() {
+                          _onSelected(index);
+                        });
+                      },
+                    ),
+                  ),
+                );
+              }),
+        ),
+        _buildRight(),
+      ],
+    );
+  }
 
   void subtractDate() {
-    DateTime today = new DateTime.now();
-    DateTime fiftyDaysAgo = today.subtract(new Duration(days: 1));
     setState(() {
-
       var today = mDate;
       mDate = today.subtract(new Duration(days: 1));
-
       _dateval = formatDate(mDate);
-
     });
-
   }
 
   void addDate() {
     setState(() {
       var today = mDate;
       mDate = today.add(new Duration(days: 1));
-
       _dateval = formatDate(mDate);
-
     });
-
   }
 
   formatDate(DateTime dd) {
-    print('inside');
     final df = new DateFormat('dd - MMM - yyyy');
     print(df.format(mDate));
-    //return (DateTime.now().day +1).toString() ;
-   // var now = new DateTime.now();
-
     var displaydate = df.format(dd);
-    // var now1 = new DateFormat.MMMMd("en_US");
-    //var ss = now.m;
-   // return (DateTime.now().day).toString();
     return displaydate;
   }
 }
-
-
