@@ -11,18 +11,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
       ),
-      //home: MyHomePage(title: 'Wel come'),
-      home: ParkingForm(),
+      home: MyHomePage(title: 'Home'),
+      //home: ParkingForm(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
 
   final String title;
 
@@ -31,46 +29,39 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child:  RaisedButton(
-          child: Text("Open Modal"),
-          onPressed: _showMyBottomSheet,
-          color: Colors.blue,
-          textColor: Colors.white,
-          padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-          splashColor: Colors.grey,
-        ),
-      ),
-    );
-
-
-
-  }
-
-  void _showMyBottomSheet(){
-    // the context of the bottomSheet will be this widget
-    //the context here is where you want to showthe bottom sheet
-    showBottomSheet(context: context,
-        builder: (BuildContext context){
-          return ParkingForm(); // returns your BottomSheet widget
+  void _showBottomSheetCallback() {
+    _scaffoldKey.currentState.showBottomSheet<void>((BuildContext context) {
+      return ParkingForm();
         }
     );
   }
 
-
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home:Scaffold(
+          key: _scaffoldKey,
+          appBar: AppBar(
+              title: const Text('Perker')
+          ),
+          body: Center(
+              child: RaisedButton(
+                  onPressed: _showBottomSheetCallback,
+                  child: Text("Open Modal"),
+                color: Colors.blue,
+                textColor: Colors.white,
+                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                splashColor: Colors.grey,
+              )
+          )
+      ),
+    );
+  }
 }
+
+
+
+
+
