@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:parking_app/screen/parking.dart';
+
 import 'package:parking_app/screen/parkingform.dart';
 
 void main() => runApp(MyApp());
