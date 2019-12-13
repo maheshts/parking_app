@@ -5,9 +5,9 @@ import 'package:parking_app/resource/parking_app_theme.dart';
 import 'dart:math' as math;
 
 class ParkingForm extends StatefulWidget {
-  String mFromTime = "12.00";
-  String mToTime = "12.30";
-  String mCloseTime = "12.50";
+  String mFromTime = "11.00";
+  String mToTime = "12.00";
+  String mCloseTime = "1 hr";
   @override
   _ParkingFormState createState() => _ParkingFormState();
 }
@@ -59,7 +59,7 @@ class _ParkingFormState extends State<ParkingForm> {
               SizedBox(height: 10),
               Divider(
                 height: 5,
-                color: Colors.black,
+                color: ParkingAppTheme.darkerText,
               ),
               SizedBox(
                 height: 15.0,
@@ -152,6 +152,7 @@ class _ParkingFormState extends State<ParkingForm> {
         height: 50,
         child: new Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
           //crossAxisAlignment: CrossAxisAlignment.start,
 
           children: <Widget>[
@@ -215,7 +216,7 @@ class _ParkingFormState extends State<ParkingForm> {
                 fontWeight: FontWeight.bold,
                 fontSize: 12,
                 letterSpacing: 0.15,
-                color: Colors.black,
+                color: ParkingAppTheme.dark_grey,
               ),
             ),
           ),
@@ -228,7 +229,7 @@ class _ParkingFormState extends State<ParkingForm> {
                 fontWeight: FontWeight.bold,
                 fontSize: 12,
                 letterSpacing: 0.15,
-                color: Colors.green,
+                color: ParkingAppTheme.green,
               ),
             ),
           ),
@@ -251,7 +252,7 @@ class _ParkingFormState extends State<ParkingForm> {
           children: <Widget>[
             getTimeBoxUI('From ', widget.mFromTime, 'am'),
             getTimeBoxUI(' To', widget.mToTime, 'pm'),
-            getTimeBoxUI('Closes at ', widget.mCloseTime, 'pm'),
+            getTimeBoxUI('Duration ', widget.mCloseTime, ''),
           ],
         ),
         const SizedBox(
@@ -296,7 +297,7 @@ class _ParkingFormState extends State<ParkingForm> {
               txt2,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontWeight: FontWeight.w200,
+                fontWeight: FontWeight.w400,
                 fontSize: 14,
                 letterSpacing: 0.17,
                 color: ParkingAppTheme.nearlyBlack,
@@ -333,7 +334,7 @@ class _ParkingFormState extends State<ParkingForm> {
                 height: 48,
                 width: 68,
                 child: InkWell(
-                  highlightColor: Colors.grey,
+                  highlightColor: ParkingAppTheme.grey,
                   borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   onTap: () {
                     subtractDate();
@@ -351,7 +352,7 @@ class _ParkingFormState extends State<ParkingForm> {
               height: 48,
               width: screenWidth - 200,
               decoration: new BoxDecoration(
-                color: Colors.white,
+                color: ParkingAppTheme.nearlyWhite,
               ),
               child: Padding(
                 padding: const EdgeInsets.only(
@@ -372,7 +373,7 @@ class _ParkingFormState extends State<ParkingForm> {
                 height: 48,
                 width: 68,
                 child: InkWell(
-                  highlightColor: Colors.grey,
+                  highlightColor: ParkingAppTheme.grey,
                   borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   onTap: () {
                     addDate();
@@ -397,11 +398,11 @@ class _ParkingFormState extends State<ParkingForm> {
       child: new Container(
         padding: new EdgeInsets.all(30.0),
         decoration: BoxDecoration(
-          color: Colors.amber,
+          color: ParkingAppTheme.amber,
           // borderRadius: const BorderRadius.all(Radius.circular(16.0)),
           boxShadow: <BoxShadow>[
             BoxShadow(
-                color: Colors.white,
+                color: ParkingAppTheme.nearlyWhite,
                 offset: const Offset(1.1, 1.1),
                 blurRadius: 16.0),
           ],
@@ -450,11 +451,11 @@ class _ParkingFormState extends State<ParkingForm> {
                             color: _selectedIndex != null &&
                                     _selectedIndex == index
                                 ? ParkingAppTheme.grey.withOpacity(0.2)
-                                : Colors.white,
+                                : ParkingAppTheme.nearlyWhite,
                             //borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                             boxShadow: <BoxShadow>[
                               BoxShadow(
-                                  color: Colors.white,
+                                  color: ParkingAppTheme.nearlyWhite,
                                   offset: const Offset(1.1, 1.1),
                                   blurRadius: 16.0),
                             ],
@@ -483,8 +484,7 @@ class _ParkingFormState extends State<ParkingForm> {
                               ],
                             ),
                           )
-                          // Center(child: Text(numbers[index].toString(), style: TextStyle(color: Colors.white, fontSize: 16.0),)),
-                          ),
+                                ),
                       onTap: () {
                         setState(() {
                           _onSelected(index);
