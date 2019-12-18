@@ -47,6 +47,8 @@ flutter:
    - assets/images/fcar.png
    - assets/images/details_bg.png
    - assets/images/logo.png
+   - assets/images/f.png
+   - assets/images/g.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg
