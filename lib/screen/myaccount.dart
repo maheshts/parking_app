@@ -235,7 +235,5 @@ class _ChangePasswordState extends State<MyAccount> {
         ));
   }
 
-
-
 }
 
