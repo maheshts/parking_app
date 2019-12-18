@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parking_app/screen/parkingdetails.dart';
 
 import 'package:parking_app/screen/parkingform.dart';
 
@@ -13,8 +14,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Home'),
-      //home: ParkingForm(),
+      //home: MyHomePage(title: 'Home'),
+      home: ParkingDetails(),
     );
   }
 }

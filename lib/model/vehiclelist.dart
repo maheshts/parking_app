@@ -36,4 +36,10 @@ class VehicleList {
   ];
 
 
+  static List paymentMethod = [
+    {"name": "Credit"},
+    {"name": "Debit"},
+    {"name": "Upi"},
+  ];
+
 }
