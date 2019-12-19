@@ -9,11 +9,14 @@ class ChangePassword extends StatefulWidget {
 
 class _ChangePasswordState extends State<ChangePassword> {
 
-  String _name;
-  String _email;
-  String _phoneno;
+  String _confirmPassword;
+  String _newpassword;
+  String _oldPassword;
   String _errorMessage;
   VoidCallback onBackPress;
+  final _oldpswdfocus = FocusNode();
+  final _newpswdfocus = FocusNode();
+  final _confirmpsdfocus = FocusNode();
 
   bool _blackVisible = false;
 
@@ -138,8 +141,16 @@ class _ChangePasswordState extends State<ChangePassword> {
       padding: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 0.0),
       child: new TextFormField(
         maxLines: 1,
-        keyboardType: TextInputType.emailAddress,
+
+        keyboardType: TextInputType.visiblePassword,
         autofocus: false,
+        obscureText: true,
+        textInputAction: TextInputAction.done,
+        focusNode: _confirmpsdfocus,
+        onFieldSubmitted: (v){
+         // FocusScope.of(context).requestFocus(phonefocus);
+          _confirmpsdfocus.unfocus();
+        },
         decoration: new InputDecoration(
 
             border: new OutlineInputBorder(
@@ -153,7 +164,7 @@ class _ChangePasswordState extends State<ChangePassword> {
               color: Colors.grey,
             )),
         validator: (value) => value.isEmpty ? 'Confirm password can\'t be empty' : null,
-        onSaved: (value) => _email = value.trim(),
+        onSaved: (value) => _confirmPassword = value.trim(),
       ),
     );
   }
@@ -163,21 +174,27 @@ class _ChangePasswordState extends State<ChangePassword> {
       padding: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 0.0),
       child: new TextFormField(
         maxLines: 1,
+        obscureText: true,
         keyboardType: TextInputType.visiblePassword,
-        autofocus: false,
+        autofocus: true,
+        textInputAction: TextInputAction.next,
+        focusNode: _oldpswdfocus,
+        onFieldSubmitted: (v){
+          FocusScope.of(context).requestFocus(_newpswdfocus);
+        },
         decoration: new InputDecoration(
             border: new OutlineInputBorder(
               borderRadius: const BorderRadius.all(
                 const Radius.circular(16.0),
               ),
             ),
-            hintText: 'Old Password',
+            hintText: 'Old password',
             suffixIcon: new Icon(
               Icons.lock_outline,
               color: Colors.grey,
             )),
         validator: (value) => value.isEmpty ? 'Name can\'t be empty' : null,
-        onSaved: (value) => _name = value.trim(),
+        onSaved: (value) => _oldPassword = value.trim(),
       ),
     );
   }
@@ -187,8 +204,14 @@ class _ChangePasswordState extends State<ChangePassword> {
       padding: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 0.0),
       child: new TextFormField(
         maxLines: 1,
+        obscureText: true,
         keyboardType: TextInputType.visiblePassword ,
         autofocus: false,
+        textInputAction: TextInputAction.next,
+        focusNode: _newpswdfocus,
+        onFieldSubmitted: (v){
+          FocusScope.of(context).requestFocus(_confirmpsdfocus);
+        },
         decoration: new InputDecoration(
 
             border: new OutlineInputBorder(
@@ -202,7 +225,7 @@ class _ChangePasswordState extends State<ChangePassword> {
               color: Colors.grey,
             )),
         validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
-        onSaved: (value) => _phoneno = value.trim(),
+        onSaved: (value) => _newpassword = value.trim(),
       ),
     );
   }

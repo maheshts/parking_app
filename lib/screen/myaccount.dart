@@ -13,6 +13,9 @@ class _ChangePasswordState extends State<MyAccount> {
   String _phoneno;
   String _errorMessage;
   VoidCallback onBackPress;
+  final emailfocus = FocusNode();
+  final phonefocus = FocusNode();
+  final namefocus = FocusNode();
 
 
   @override
@@ -126,7 +129,7 @@ class _ChangePasswordState extends State<MyAccount> {
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
                       letterSpacing: 0.17,
-                      // background: Paint()..color = Colors.blue,
+
                       color: ParkingAppTheme.nearlyBlack,
                     ),),
                     onPressed: null,
@@ -152,6 +155,11 @@ class _ChangePasswordState extends State<MyAccount> {
         maxLines: 1,
         keyboardType: TextInputType.emailAddress,
         autofocus: false,
+        focusNode: emailfocus,
+        onFieldSubmitted: (v){
+          FocusScope.of(context).requestFocus(phonefocus);
+        },
+        textInputAction: TextInputAction.next,
         decoration: new InputDecoration(
 
             border: new OutlineInputBorder(
@@ -175,8 +183,13 @@ class _ChangePasswordState extends State<MyAccount> {
       padding: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 0.0),
       child: new TextFormField(
         maxLines: 1,
+        textInputAction: TextInputAction.next,
         keyboardType: TextInputType.text,
         autofocus: false,
+        focusNode: namefocus,
+        onFieldSubmitted: (v){
+          FocusScope.of(context).requestFocus(emailfocus);
+        },
         decoration: new InputDecoration(
             border: new OutlineInputBorder(
               borderRadius: const BorderRadius.all(
@@ -201,6 +214,11 @@ class _ChangePasswordState extends State<MyAccount> {
         maxLines: 1,
         keyboardType: TextInputType.phone,
         autofocus: false,
+        focusNode: phonefocus,
+        textInputAction: TextInputAction.done,
+        onFieldSubmitted: (v){
+          phonefocus.unfocus();
+        },
         decoration: new InputDecoration(
 
             border: new OutlineInputBorder(
