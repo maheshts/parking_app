@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:parking_app/resource/parking_app_theme.dart';
+
 class SignUp extends StatefulWidget {
   @override
   _SignUpState createState() => _SignUpState();
 }
 
 class _SignUpState extends State<SignUp> {
-
   String _email;
   String _name;
   String _phoneno;
@@ -27,102 +27,97 @@ class _SignUpState extends State<SignUp> {
     };
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     final signupButon = Material(
       elevation: 5.0,
-
       borderRadius: BorderRadius.circular(22.0),
       color: ParkingAppTheme.nearlyBlack,
       child: MaterialButton(
-         minWidth: MediaQuery.of(context).size.width,
+        minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
         onPressed: () {},
-        child: Row( // Replace with a Row for horizontal icon + text
+        child: Row(
+          // Replace with a Row for horizontal icon + text
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("Register",style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 16,
-              letterSpacing: 0.17,
-              color: ParkingAppTheme.nearlyWhite,
-            ),),
-            SizedBox(width: 10,),
-            Icon(Icons.arrow_forward,color: Colors.white,),
-
-
+            Text(
+              "Register",
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+                letterSpacing: 0.17,
+                color: ParkingAppTheme.nearlyWhite,
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Icon(
+              Icons.arrow_forward,
+              color: Colors.white,
+            ),
           ],
-       // Text("Signup",textAlign: TextAlign.center,
-            //style: style.copyWith(color: Colors.white, fontSize:16,fontWeight: FontWeight.bold)),
-      ),
-
+          // Text("Signup",textAlign: TextAlign.center,
+          //style: style.copyWith(color: Colors.white, fontSize:16,fontWeight: FontWeight.bold)),
+        ),
       ),
     );
     return WillPopScope(
-        onWillPop: onBackPress,
-        child: Scaffold(
-        body:
-        ListView(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(
-                top: 70.0, bottom: 30.0, left: 10.0, right: 10.0),
-            child: Text(
-              "Get Started with parker",
-              softWrap: true,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                color: Colors.amber,
-                decoration: TextDecoration.none,
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-                fontFamily: "Poppins",
+      onWillPop: onBackPress,
+      child: Scaffold(
+        body: ListView(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(
+                  top: 70.0, bottom: 30.0, left: 10.0, right: 10.0),
+              child: Text(
+                "Get Started with parker",
+                softWrap: true,
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: Colors.amber,
+                  decoration: TextDecoration.none,
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Poppins",
+                ),
               ),
             ),
-          ),
-          _showNameInput(),
-          SizedBox(height: 10),
-          _showEmailInput(),
-          SizedBox(height: 10),
-          _showPhoneNoInput(),
-          SizedBox(height: 10),
-          _passwordInput(),
-      Padding(
-        padding:
-        const EdgeInsets.only(left: 18.0, right: 8.0, top: 8.0, bottom: 8.0),
-        child:  Row(
-            children:
-
-            <Widget>[
-              Checkbox(
-                  value: false,
-                  onChanged: (bool newValue) {
-                    setState(() {
-                      //checkBoxValue = newValue;
-                    });
-                  }),
-              Text("I accept the Terms & conditions"),
-            ],
-          ),
-      ),
-
-
-      Container(
-        margin: EdgeInsets.only(left: 140,top: 20,right:15),
-        width: 120,
-        child: //<Widget>[
-        signupButon,
+            _showNameInput(),
+            SizedBox(height: 10),
+            _showEmailInput(),
+            SizedBox(height: 10),
+            _showPhoneNoInput(),
+            SizedBox(height: 10),
+            _passwordInput(),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 18.0, right: 8.0, top: 8.0, bottom: 8.0),
+              child: Row(
+                children: <Widget>[
+                  Checkbox(
+                      value: false,
+                      onChanged: (bool newValue) {
+                        setState(() {
+                          //checkBoxValue = newValue;
+                        });
+                      }),
+                  Text("I accept the Terms & conditions"),
+                ],
+              ),
             ),
-
-
-
-    ],),
-    ),);
-
+            Container(
+              margin: EdgeInsets.only(left: 140, top: 20, right: 15),
+              width: 120,
+              child: //<Widget>[
+                  signupButon,
+            ),
+          ],
+        ),
+      ),
+    );
   }
-
 
   Widget _passwordInput() {
     return Padding(
@@ -134,12 +129,11 @@ class _SignUpState extends State<SignUp> {
         obscureText: true,
         focusNode: passwordfocus,
         textInputAction: TextInputAction.done,
-        onFieldSubmitted: (v){
+        onFieldSubmitted: (v) {
           passwordfocus.unfocus();
           //register();
         },
         decoration: new InputDecoration(
-
             border: new OutlineInputBorder(
               borderRadius: const BorderRadius.all(
                 const Radius.circular(16.0),
@@ -150,7 +144,8 @@ class _SignUpState extends State<SignUp> {
               Icons.lock,
               color: Colors.grey,
             )),
-        validator: (value) => value.isEmpty ? 'Confirm password can\'t be empty' : null,
+        validator: (value) =>
+            value.isEmpty ? 'Confirm password can\'t be empty' : null,
         onSaved: (value) => _password = value.trim(),
       ),
     );
@@ -165,11 +160,10 @@ class _SignUpState extends State<SignUp> {
         keyboardType: TextInputType.emailAddress,
         autofocus: false,
         focusNode: emailfocus,
-        onFieldSubmitted: (v){
+        onFieldSubmitted: (v) {
           FocusScope.of(context).requestFocus(phonefocus);
         },
         decoration: new InputDecoration(
-
             border: new OutlineInputBorder(
               borderRadius: const BorderRadius.all(
                 const Radius.circular(16.0),
@@ -194,7 +188,7 @@ class _SignUpState extends State<SignUp> {
         keyboardType: TextInputType.text,
         autofocus: true,
         focusNode: namefocus,
-        onFieldSubmitted: (v){
+        onFieldSubmitted: (v) {
           FocusScope.of(context).requestFocus(emailfocus);
         },
         textInputAction: TextInputAction.next,
@@ -223,12 +217,11 @@ class _SignUpState extends State<SignUp> {
         keyboardType: TextInputType.phone,
         autofocus: false,
         focusNode: phonefocus,
-        onFieldSubmitted: (v){
+        onFieldSubmitted: (v) {
           FocusScope.of(context).requestFocus(passwordfocus);
         },
         textInputAction: TextInputAction.next,
         decoration: new InputDecoration(
-
             border: new OutlineInputBorder(
               borderRadius: const BorderRadius.all(
                 const Radius.circular(16.0),

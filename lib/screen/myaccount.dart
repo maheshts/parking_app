@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:parking_app/resource/parking_app_theme.dart';
 
@@ -17,7 +16,6 @@ class _ChangePasswordState extends State<MyAccount> {
   final phonefocus = FocusNode();
   final namefocus = FocusNode();
 
-
   @override
   void initState() {
     super.initState();
@@ -32,7 +30,7 @@ class _ChangePasswordState extends State<MyAccount> {
     return WillPopScope(
       onWillPop: onBackPress,
       child: Scaffold(
-       /* appBar: new AppBar(
+        /* appBar: new AppBar(
           title: new Text('Parkr'),
           backgroundColor: Colors.grey,
         ),*/
@@ -112,33 +110,27 @@ class _ChangePasswordState extends State<MyAccount> {
                   ),
                 ),
                 SizedBox(height: 5),
-
-
                 _showPhoneNoInput(),
-
                 SizedBox(height: 10),
-
                 Container(
                   //color: DesignCourseAppTheme.nearlyBlack.withOpacity(0.8),
-                  margin: EdgeInsets.only(left: 36,top: 16,right: 36),
-                  child:
-                new OutlineButton(
-                  //color: Colors.blue,
-                    borderSide: BorderSide(color: Colors.black26),
-                    child: new Text("Update",style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                      letterSpacing: 0.17,
-
-                      color: ParkingAppTheme.nearlyBlack,
-                    ),),
-                    onPressed: null,
-                    shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)
-                    )
+                  margin: EdgeInsets.only(left: 36, top: 16, right: 36),
+                  child: new OutlineButton(
+                      //color: Colors.blue,
+                      borderSide: BorderSide(color: Colors.black26),
+                      child: new Text(
+                        "Update",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                          letterSpacing: 0.17,
+                          color: ParkingAppTheme.nearlyBlack,
+                        ),
+                      ),
+                      onPressed: null,
+                      shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0))),
                 ),
-                ),
-
-
               ],
             ),
           ],
@@ -146,7 +138,6 @@ class _ChangePasswordState extends State<MyAccount> {
       ),
     );
   }
-
 
   Widget _showEmailInput() {
     return Padding(
@@ -156,12 +147,11 @@ class _ChangePasswordState extends State<MyAccount> {
         keyboardType: TextInputType.emailAddress,
         autofocus: false,
         focusNode: emailfocus,
-        onFieldSubmitted: (v){
+        onFieldSubmitted: (v) {
           FocusScope.of(context).requestFocus(phonefocus);
         },
         textInputAction: TextInputAction.next,
         decoration: new InputDecoration(
-
             border: new OutlineInputBorder(
               borderRadius: const BorderRadius.all(
                 const Radius.circular(16.0),
@@ -187,7 +177,7 @@ class _ChangePasswordState extends State<MyAccount> {
         keyboardType: TextInputType.text,
         autofocus: false,
         focusNode: namefocus,
-        onFieldSubmitted: (v){
+        onFieldSubmitted: (v) {
           FocusScope.of(context).requestFocus(emailfocus);
         },
         decoration: new InputDecoration(
@@ -216,11 +206,10 @@ class _ChangePasswordState extends State<MyAccount> {
         autofocus: false,
         focusNode: phonefocus,
         textInputAction: TextInputAction.done,
-        onFieldSubmitted: (v){
+        onFieldSubmitted: (v) {
           phonefocus.unfocus();
         },
         decoration: new InputDecoration(
-
             border: new OutlineInputBorder(
               borderRadius: const BorderRadius.all(
                 const Radius.circular(16.0),
@@ -241,17 +230,14 @@ class _ChangePasswordState extends State<MyAccount> {
     return new Padding(
         padding: EdgeInsets.fromLTRB(60.0, 25.0, 40.0, 60.0),
         child: SizedBox(
-          height: 40.0,
-          child:   RaisedButton(
-            //onPressed: _showBottomSheetCallback,
-            child: Text("Open Modal"),
-            color: Colors.blue,
-            textColor: Colors.white,
-            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-            splashColor: Colors.grey,
-          )
-        ));
+            height: 40.0,
+            child: RaisedButton(
+              //onPressed: _showBottomSheetCallback,
+              child: Text("Open Modal"),
+              color: Colors.blue,
+              textColor: Colors.white,
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              splashColor: Colors.grey,
+            )));
   }
-
 }
-
