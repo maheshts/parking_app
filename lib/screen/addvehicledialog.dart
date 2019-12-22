@@ -14,6 +14,13 @@ class _AddDialogState extends State<AddVehicleDialog> {
   int _selectedIndex = 0;
   String registratioNo = "";
 
+  ScrollController scrollController;
+
+  Future<bool> _hardwareBack(BuildContext context) {
+    return Future.value(false);
+  }
+
+
   _onSelected(int index) {
     setState(() => _selectedIndex = index);
   }
@@ -36,6 +43,7 @@ class _AddDialogState extends State<AddVehicleDialog> {
               return Container(
 
                 child: SingleChildScrollView(
+                  controller: scrollController,
                   padding: EdgeInsets.only(top: 5),
                   child: Column(
 
@@ -47,7 +55,10 @@ class _AddDialogState extends State<AddVehicleDialog> {
                     SizedBox(height: 10),
 
 
-                    new TextField(
+                  Container(
+                    height: 40,
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: new TextField(
                       autofocus: true,
                       keyboardType: TextInputType.text,
 
@@ -55,16 +66,17 @@ class _AddDialogState extends State<AddVehicleDialog> {
                         fillColor: Colors.white,
                         border: new OutlineInputBorder(
                           borderRadius: const BorderRadius.all(
-                            const Radius.circular(20.0),
+                            const Radius.circular(8.0),
 
                           ),
                         ),
                         hintText: 'VEHICLE REGISTRATION NO.',
+                        contentPadding: EdgeInsets.symmetric(vertical: 8.0,horizontal:12.0),
                       ),
                       onChanged: (value) {
                         registratioNo = value;
                       },
-                    ),
+                    ),),
                     SizedBox(
                       height: 10,
                     ),
@@ -73,14 +85,11 @@ class _AddDialogState extends State<AddVehicleDialog> {
                       child: SizedBox(
                         width: double.infinity,
                         child: Text(
-                          'SELECT MODEL',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w800,
-                            fontSize: 16,
-                            letterSpacing: 0.17,
-                            color: ParkingAppTheme.darkerText,
-                          ),
+                          'Select Model',
+                          style: Theme.of(context)
+                              .textTheme
+                              .title
+                              .copyWith(color: Colors.black54),
                         ),
                       ),
                     ),
@@ -89,7 +98,7 @@ class _AddDialogState extends State<AddVehicleDialog> {
                     Container(
                       //padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
                       margin: EdgeInsets.only(left: 5, right: 5, top: 5),
-                      height: 90,
+                      height: 120,
                       width: MediaQuery.of(context).size.width-50,
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
@@ -97,14 +106,12 @@ class _AddDialogState extends State<AddVehicleDialog> {
                           itemBuilder: (context, index) {
                             //vehicledata:VehicleList.homeList[index];
                             return Container(
-                              padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
-                              //width: 90,
-
                               //child: RaisedButton(
                               //color: Colors.transparent,
                               child: InkWell(
 
                                 child: Container(
+                                 // height: 90,
                                        decoration: BoxDecoration(
                                 color:Colors.transparent,
                                 shape: BoxShape.circle,
@@ -122,7 +129,7 @@ class _AddDialogState extends State<AddVehicleDialog> {
                               ),
                                     child: Container(
                                       margin: EdgeInsets.only(left: 8,right: 8),
-
+                                       // height: 85,
                                       alignment: Alignment(0, 0),
                                       child: Stack(
                                         children: <Widget>[
@@ -139,14 +146,17 @@ class _AddDialogState extends State<AddVehicleDialog> {
                                               Image.asset(
                                                   VehicleList
                                                       .homeList[index].imagePath,
-                                                  height: 36,
-                                                  width: 36,
+                                                  height: 30,
+                                                  width: 30,
                                                   fit: BoxFit.fill),
                                               SizedBox(
                                                 height: 5,
                                               ),
                                               Text(VehicleList
-                                                  .homeList[index].vehicle_name,style: ParkingAppTheme.subtitle,),
+                                                  .homeList[index].vehicle_name,style: Theme.of(context)
+                                                  .textTheme
+                                                  .subtitle
+                                                  .copyWith(color: Colors.black54),),
                                             ],
                                           ),
                                         ],
@@ -170,22 +180,20 @@ class _AddDialogState extends State<AddVehicleDialog> {
                     ),
 
                     Container(
-                      margin: EdgeInsets.only(left: 140,right: 10,top: 20),
-                      child:
-                    new RaisedButton(
-                      color: ParkingAppTheme.nearlyBlack,
+                      alignment: Alignment.centerRight,
+                      margin: EdgeInsets.only(right: 12,top: 8.0,bottom: 8.0),
+                      child: RaisedButton(
+                        color: Colors.black,
+                        child: Text("Add ",style: Theme.of(context).textTheme.subtitle.copyWith(color: Colors.white)),
+                        shape: new RoundedRectangleBorder(
+                          borderRadius:
+                          new BorderRadius.circular(30.0),),
+                        onPressed: (){
+                          print("Hi");
+                        },
+                      ),
+                    ),
 
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text("Add",style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        letterSpacing: 0.17,
-                        color: ParkingAppTheme.nearlyWhite,
-                      ),),
-                    ),
-                    ),
 
                 ],),
                 ),
@@ -208,118 +216,6 @@ class _AddDialogState extends State<AddVehicleDialog> {
     return new Container();
 
 
-      /*Scaffold(
-      body:Container(
-        margin: EdgeInsets.all(32),
-        child:Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          new TextField(
-            autofocus: true,
-            *//* decoration: new InputDecoration(
-                      labelText: 'Team Name', hintText: 'eg. Juventus F.C.'),*//*
-            decoration: new InputDecoration(
 
-              fillColor: Colors.white,
-              border: new OutlineInputBorder(
-                borderRadius: const BorderRadius.all(
-                  const Radius.circular(24.0),
-                ),
-              ),
-              hintText: 'VEHICLE REGISTRATION NO.',
-
-            ),
-
-            onChanged: (value) {
-              registrationNo = value;
-            },
-          ),
-
-          SizedBox(height: 10,),
-
-          new Container(
-            //padding: EdgeInsets.only(left: 20.0),
-            child: SizedBox(
-              width: double.infinity,
-              child: Text(
-                'SELECT MODEL',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontWeight: FontWeight.w800,
-                  fontSize: 20,
-                  letterSpacing: 0.17,
-                  color: ParkingAppTheme.darkerText,
-                ),
-              ),
-            ),
-          ),
-          Container(
-            //padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
-            margin: EdgeInsets.only(left: 10, right: 5),
-            height: 150,
-            width: 250,
-
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: VehicleList.homeList.length,
-                //itemCount: 2,
-                itemBuilder: (context, index) {
-                  //vehicledata:VehicleList.homeList[index];
-                  return Container(
-                    width: 105,
-                    child: InkWell(
-                      child: Container(
-                          decoration: BoxDecoration(
-                            color: _selectedIndex != null &&
-                                _selectedIndex == index
-                                ? ParkingAppTheme.grey
-                                .withOpacity(0.1)
-                                : Colors.white,
-                            borderRadius: const BorderRadius.all(Radius.circular(24.0)),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                  color: Colors.white,
-                                  //offset: const Offset(1.1, 1.1),
-                                  blurRadius: 16.0),
-                            ],
-                          ),
-                          child: Center(
-                            child: Stack(
-                              children: <Widget>[
-                                Column(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: <Widget>[
-                                    //Image.asset(vehicleDetails[index]['image_url'],
-                                    Image.asset(
-                                        "assets/images/bike.png",
-                                        height: 50,
-                                        fit: BoxFit.fill),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(VehicleList.homeList[index].vehicle_name),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          )
-                        // Center(child: Text(numbers[index].toString(), style: TextStyle(color: Colors.white, fontSize: 16.0),)),
-                      ),
-                      onTap: () {
-                        setState(() {
-                          _onSelected(index);
-                        });
-                      },
-                    ),
-
-                  );
-                }),
-          ),
-      ],),
-      ),
-    );*/
   }
 }

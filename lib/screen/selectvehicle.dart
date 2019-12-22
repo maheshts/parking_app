@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:parking_app/resource/parking_app_theme.dart';
 import 'package:parking_app/screen/addvehicledialog.dart';
 
 class SelectVehicle extends StatefulWidget {
@@ -9,6 +10,8 @@ class SelectVehicle extends StatefulWidget {
 }
 
 class _SelectVehicleState extends State<SelectVehicle> {
+
+
   @override
   Widget build(BuildContext context) {
     var currentSelectedValue;
@@ -17,8 +20,8 @@ class _SelectVehicleState extends State<SelectVehicle> {
 
     Widget vehicleDropDown() {
       return Container(
-        height: 50,
-        width: 300,
+        height: 40,
+        width: MediaQuery.of(context).size.width-50,
         margin: EdgeInsets.only(left: 40, top: 80, right: 40),
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         decoration: BoxDecoration(
@@ -56,7 +59,14 @@ class _SelectVehicleState extends State<SelectVehicle> {
 
 
 
+
+Container(
+  margin: EdgeInsets.only(top: 12.0),
+  child:
         new RaisedButton(
+          color: ParkingAppTheme.nearlyBlack,
+
+
           onPressed: () {
             //final String currentTeam = await _asyncInputDialog(context);
             //print("Current team name is $currentTeam");
@@ -65,8 +75,12 @@ class _SelectVehicleState extends State<SelectVehicle> {
               builder: (_) => AddVehicleDialog(),
             );
           },
-          child: const Text("Add Vehicle"),
-        ),
+          child: Text("Add Vehicle",style: Theme.of(context).textTheme.subtitle.copyWith(color: Colors.white)),
+          shape: new RoundedRectangleBorder(
+            borderRadius:
+            new BorderRadius.circular(30.0),),
+
+        ),),
 
 
 

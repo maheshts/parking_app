@@ -15,122 +15,133 @@ class _ChangePasswordState extends State<ChangePassword> {
   final _oldpswdfocus = FocusNode();
   final _newpswdfocus = FocusNode();
   final _confirmpsdfocus = FocusNode();
+  final _formKey = GlobalKey<FormState>();
+
+  ScrollController scrollController;
+
+  Future<bool> _hardwareBack(BuildContext context) {
+    return Future.value(false);
+  }
 
   bool _blackVisible = false;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      /*appBar: new AppBar(
-        //title: new Text('Manage Account'),
-      ),*/
-      body: Stack(
-        alignment: Alignment.topLeft,
-        children: <Widget>[
-          ListView(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 70.0, bottom: 30.0, left: 10.0, right: 10.0),
-                child: Text(
-                  "Manage Account",
-                  softWrap: true,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Colors.amber,
-                    decoration: TextDecoration.none,
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "OpenSans",
-                  ),
-                ),
+    return SafeArea(
+      child: WillPopScope(
+        onWillPop: () => _hardwareBack(context),
+        child: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: true,
+            backgroundColor: ParkingAppTheme.nearlyWhite,
+            title: Image.asset(
+              'assets/images/logo.png',
+              fit: BoxFit.cover,
+              height: 28,
+            ),
+            leading: IconButton(icon: Icon(Icons.arrow_back)),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.notifications,color: Colors.black,),
+                onPressed: () {},
               ),
-              new Container(
-                padding: EdgeInsets.only(left: 20.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    'OLD PASSWORD',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                      letterSpacing: 0.17,
-                      color: ParkingAppTheme.darkerText,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 5),
-              _oldpswdInput(),
-              SizedBox(height: 15),
-              new Container(
-                padding: EdgeInsets.only(left: 20.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    'NEW PASSWORD',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                      letterSpacing: 0.17,
-                      color: ParkingAppTheme.darkerText,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 5),
-              _showNewPasswordInput(),
-              SizedBox(height: 10),
-              new Container(
-                padding: EdgeInsets.only(left: 20.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    'CONFIRM PASSWORD',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                      letterSpacing: 0.17,
-                      color: ParkingAppTheme.darkerText,
-                    ),
-                  ),
-                ),
-              ),
-              _showConfirmPasswordInput(),
-              SizedBox(height: 10),
-              Container(
-                //color: DesignCourseAppTheme.nearlyBlack.withOpacity(0.8),
-                margin: EdgeInsets.only(left: 36, top: 16, right: 36),
-                child: new OutlineButton(
-                    //color: Colors.blue,
-                    borderSide: BorderSide(color: Colors.black26),
-                    child: new Text(
-                      "Update",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        letterSpacing: 0.17,
-                        // background: Paint()..color = Colors.blue,
-                        color: ParkingAppTheme.nearlyBlack,
-                      ),
-                    ),
-                    onPressed: null,
-                    shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0))),
+              IconButton(
+                icon: Icon(Icons.more_vert,color: Colors.black,),
+                onPressed: () {},
               ),
             ],
           ),
-        ],
+          body: SingleChildScrollView(
+            controller: scrollController,
+            child: Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 8.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 12.0, horizontal: 12),
+                        child: Text(
+                          "Manage Account",
+                          softWrap: true,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            color: Colors.amber,
+                            decoration: TextDecoration.none,
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "OpenSans",
+                          ),
+                        ),
+                      ),
+                      new Container(
+                        padding: EdgeInsets.only(left: 12.0,top: 8),
+                        child: Text(
+                          'Old Password',
+                          style: Theme.of(context)
+                              .textTheme
+                              .title
+                              .copyWith(color: Colors.black54),
+                        ),
+                      ),
+
+                      SizedBox(height: 5),
+                      _oldpswdInput(),
+                      SizedBox(height: 8),
+                      new Container(
+                        padding: EdgeInsets.only(left: 12.0,top: 8),
+                        child: Text(
+                          'New Password',
+                          style: Theme.of(context)
+                              .textTheme
+                              .title
+                              .copyWith(color: Colors.black54),
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      _showNewPasswordInput(),
+                      SizedBox(height: 8),
+                      new Container(
+                        padding: EdgeInsets.only(left: 12.0,top: 8),
+                        child: Text(
+                          'Confirm Password',
+                          style: Theme.of(context)
+                              .textTheme
+                              .title
+                              .copyWith(color: Colors.black54),
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      _showConfirmPasswordInput(),
+                      SizedBox(height: 16),
+                      _showPrimaryButton(),
+
+
+
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+
+          ),
+        ),
       ),
     );
   }
 
   Widget _showConfirmPasswordInput() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 0.0),
+    return Container(
+      height: 40,
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       child: new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.visiblePassword,
@@ -139,16 +150,18 @@ class _ChangePasswordState extends State<ChangePassword> {
         textInputAction: TextInputAction.done,
         focusNode: _confirmpsdfocus,
         onFieldSubmitted: (v) {
-          // FocusScope.of(context).requestFocus(phonefocus);
-          _confirmpsdfocus.unfocus();
+          v.isEmpty ? 'Confirm password can\'t be empty' : _confirmpsdfocus.unfocus();
+
+
         },
         decoration: new InputDecoration(
             border: new OutlineInputBorder(
               borderRadius: const BorderRadius.all(
-                const Radius.circular(16.0),
+                const Radius.circular(8.0),
               ),
             ),
-            hintText: 'Confirm Password',
+            hintText: 'Enter confirm Password',
+            contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
             suffixIcon: new Icon(
               Icons.lock,
               color: Colors.grey,
@@ -160,9 +173,12 @@ class _ChangePasswordState extends State<ChangePassword> {
     );
   }
 
+
+
   Widget _oldpswdInput() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 0.0),
+    return Container(
+      height: 40,
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       child: new TextFormField(
         maxLines: 1,
         obscureText: true,
@@ -171,15 +187,16 @@ class _ChangePasswordState extends State<ChangePassword> {
         textInputAction: TextInputAction.next,
         focusNode: _oldpswdfocus,
         onFieldSubmitted: (v) {
-          FocusScope.of(context).requestFocus(_newpswdfocus);
+          v.isEmpty ? 'Name can\'t be empty' : FocusScope.of(context).requestFocus(_newpswdfocus);
         },
         decoration: new InputDecoration(
             border: new OutlineInputBorder(
               borderRadius: const BorderRadius.all(
-                const Radius.circular(16.0),
+                const Radius.circular(8.0),
               ),
             ),
-            hintText: 'Old password',
+            hintText: 'Enter old password',
+            contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
             suffixIcon: new Icon(
               Icons.lock_outline,
               color: Colors.grey,
@@ -191,8 +208,9 @@ class _ChangePasswordState extends State<ChangePassword> {
   }
 
   Widget _showNewPasswordInput() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 0.0),
+    return Container(
+      height: 40,
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       child: new TextFormField(
         maxLines: 1,
         obscureText: true,
@@ -201,15 +219,16 @@ class _ChangePasswordState extends State<ChangePassword> {
         textInputAction: TextInputAction.next,
         focusNode: _newpswdfocus,
         onFieldSubmitted: (v) {
-          FocusScope.of(context).requestFocus(_confirmpsdfocus);
+          v.isEmpty ? 'Password can\'t be empty' :FocusScope.of(context).requestFocus(_confirmpsdfocus);
         },
         decoration: new InputDecoration(
             border: new OutlineInputBorder(
               borderRadius: const BorderRadius.all(
-                const Radius.circular(16.0),
+                const Radius.circular(8.0),
               ),
             ),
-            hintText: 'New password',
+            hintText: 'Enter new password',
+            contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
             suffixIcon: new Icon(
               Icons.lock,
               color: Colors.grey,
@@ -221,29 +240,19 @@ class _ChangePasswordState extends State<ChangePassword> {
   }
 
   Widget _showPrimaryButton() {
-    return new Padding(
-        padding: EdgeInsets.fromLTRB(60.0, 25.0, 40.0, 60.0),
-        child: SizedBox(
-            height: 40.0,
-            child: RaisedButton(
-              //onPressed: _showBottomSheetCallback,
-              child: Text("Open Modal"),
-              color: Colors.blue,
-              textColor: Colors.white,
-              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-              splashColor: Colors.grey,
-            ) /*new RaisedButton(
-            elevation: 5.0,
-            shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(30.0)),
-           // color: Colors.blue,
-
-            child: new Text('Submit',
-              style: DesignCourseAppTheme.title
-                //new TextStyle(fontSize: 20.0, color: Colors.white),
-              //onPressed: _validateAndSubmit,
-            ),
-          ),*/
-            ));
+    return  Container(
+      alignment: Alignment.centerRight,
+      margin: EdgeInsets.only(right: 12,top: 8.0,bottom: 8.0),
+      child: RaisedButton(
+        color: Colors.black,
+        child: Text("Save \t \u2192",style: Theme.of(context).textTheme.subtitle.copyWith(color: Colors.white),),
+        shape: new RoundedRectangleBorder(
+          borderRadius:
+          new BorderRadius.circular(30.0),),
+        onPressed: (){
+          print("Hi");
+        },
+      ),
+    );
   }
 }
