@@ -34,7 +34,9 @@ class VehicleList {
 
     ),
   ];
-
+ static List<Map> vehicleTypes = [{"id":0,"name":"Car"},{"id":1,"name":"Bike"},{"id":2,"name":"Truck"}];
+ static List<Map> vehicleModel = [{"id":0,"name":"Xuv"},{"id":1,"name":"Alto"},{"id":2,"name":"Xylo"}];
+ static List<Map> vehicleColors = [{"id":0,"name":"Black"},{"id":1,"name":"White"},{"id":2,"name":"Other"}];
 
   static List paymentMethod = [
     {"name": "Credit"},
